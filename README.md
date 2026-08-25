@@ -24,7 +24,7 @@
   
   
 
-本游戏提供两大功能模块
+本游戏提供三大功能模块
 
 1、单人挑战游戏：
 
@@ -50,6 +50,14 @@
 
 
 
+3、组合速查：
+
+3.1 界面提供 A–K 共 13 张牌面卡片（两行排列：第一行 7 张、第二行 6 张），最多可同时点选 4 张；下方列出所有「同时包含所选牌面」的可解组合（并列关系）。选中的卡片底色变为淡绿色。
+
+3.2 再次点击已选中的卡片可取消选中；点击第二行末位的【清空】按钮一次清除全部选择。
+
+
+
 ### 技术栈：
 
 Phaser 3 + TypeScript + Vite
@@ -71,6 +79,6 @@ Phaser 3 + TypeScript + Vite
 
 ### 规格说明：
 
-详细规格见 [`openspec/specs/`](openspec/specs/)（按能力拆分：`game-core` / `solver` / `solo-challenge` / `hint` / `highlights`）。
+详细规格见 [`openspec/specs/`](openspec/specs/)（按能力拆分：`game-core` / `solver` / `solo-challenge` / `hint` / `highlights` / `combos`）。
 
 
