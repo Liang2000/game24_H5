@@ -68,3 +68,9 @@ Phaser 3 + TypeScript + Vite
 界面漂亮，简洁，年轻化色彩，单页H5上下滑动展示两大功能
 
 
+
+### 规格说明：
+
+详细规格见 [`openspec/specs/`](openspec/specs/)（按能力拆分：`game-core` / `solver` / `solo-challenge` / `hint` / `highlights`）。
+
+

@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-24 点 (24-point) puzzle game. This is currently a **documentation-only** repository — no source code, `package.json`, or build tooling exists yet, so there are no build/lint/test commands to run. The executable specification lives across three files: `README.md` (product description), `CONTEXT.md` (domain glossary), and `docs/spec.md` (detailed spec).
+24 点 (24-point) puzzle game, built with Phaser 3 + TypeScript + Vite. The executable specification lives across: `README.md` (product description), `CONTEXT.md` (domain glossary), and `openspec/specs/` (OpenSpec canonical specs — `game-core`, `solver`, `solo-challenge`, `hint`, `highlights`).
 
 ## Tech stack (resolved)
 
-**Phaser 3 + TypeScript + Vite**, deployed as an H5 web app via Nginx and run in the browser — matches `README.md` and the repo name `game24_H5`. `docs/spec.md` §2 has been aligned to this stack (it previously described a Python/PySide6 desktop `.exe`).
+**Phaser 3 + TypeScript + Vite**, deployed as an H5 web app via Nginx and run in the browser — matches `README.md` and the repo name `game24_H5`. The tech stack is recorded in `openspec/config.yaml` (the spec previously described a Python/PySide6 desktop `.exe`).
 
 - Local storage: browser `localStorage` for score records (高光时刻).
 - Solver: exact rational arithmetic using an integer numerator/denominator fraction type — do **not** use Python's `fractions.Fraction`; the arithmetic approach is stack-independent, only the rational-number representation changes.
@@ -28,12 +28,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Game rules (two modules)
 
-1. **单人挑战 (Solo challenge)** — each level is 10 hands shown one at a time. Scoring: +1 correct (including correctly judging "无解"), 0 skip, −1 wrong (score may go negative). Reaching ≥ 8 passes the level immediately. Player submits an expression (【提交】) or claims no-solution (【无解】). A 【跳过】 button is implied by the skip scoring rule but not described in the UI (open item, `docs/spec.md` §10). 【高光时刻】 shows saved records.
+1. **单人挑战 (Solo challenge)** — each level is 10 hands shown one at a time. Scoring: +1 correct (including correctly judging "无解"), 0 skip, −1 wrong (score may go negative). Reaching ≥ 8 passes the level immediately. Player submits an expression (【提交】) or claims no-solution (【无解】). A 【跳过】 button is provided per the skip scoring rule (see `openspec/specs/solo-challenge`). 【高光时刻】 shows saved records.
 2. **24 点提示 (Hint)** — 4 number boxes; player picks from 13 cards (A, 2–10, J, Q, K), repeats allowed, click a filled box to clear it; 【提示】 lists solutions.
 
-## Solver requirements (`docs/spec.md` §5)
+## Solver requirements (`openspec/specs/solver`)
 
-- Exact rational arithmetic, never floating point (`docs/spec.md` names Python's `fractions.Fraction` under its desktop stack).
+- Exact rational arithmetic, never floating point.
 - Judge solvability of any 4 numbers (drives the "无解" verdict).
 - List only "essentially different" solutions: expressions differing solely by commutativity/associativity of `+`/`×` collapse to one; different operators or structure are distinct. Cap output at 20 solutions.
 - Expression validation accepts `+ − × ÷` and parentheses, compatible with `* /` and full-width symbols; must use the 4 given values each exactly once and equal 24.

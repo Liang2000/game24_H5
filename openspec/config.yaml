@@ -1,32 +1,45 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+# Project context (shown to AI when creating artifacts)
+context: |
+  Tech stack: Phaser 3 (WebGL) + TypeScript + Vite. H5 web app, built by Vite and
+  deployed via Nginx, runs in the browser. No server-side state; score records
+  (高光时刻) persist in browser localStorage under key `game24_highlights`.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  Conventions:
+  - The 24-point solver uses EXACT rational arithmetic — integer numerator/denominator
+    plus gcd — never floating point. Only the number representation may change.
+  - Domain vocabulary is authoritative in CONTEXT.md. Use its terms exactly, including
+    the _Avoid_ lists below.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Domain vocabulary (source of truth: CONTEXT.md):
+  - 牌组 (Deck): standard 52-card deck; suits are decorative only. _Avoid_: 牌堆
+  - 牌面数值 (Face value): A=1, J=11, Q=12, K=13, else the card's number. _Avoid_: 牌值, 点数
+  - 题目 (Hand): the 4 drawn cards' numbers to compute with. _Avoid_: 一组, 题, 组
+  - 解法 (Solution): an expression using all 4 numbers exactly once, + − × ÷ and
+    parentheses, equal to exactly 24. Intermediate fractions/negatives allowed; divisor ≠ 0.
+  - 无解 (Unsolvable): no solution exists for a hand.
+  - 关卡 (Level): a unit of 10 hands. _Avoid_: 轮, 局
+  - 过关 (Pass): score ≥ 8 within a level.
+  - 高光时刻 (Highlights): locally saved score records.
+
+  Game rules: two modules — 单人挑战 (solo challenge, 10 hands per level, +1/0/−1 scoring,
+  pass at ≥ 8) and 24 点提示 (hint, pick 4 cards, list solutions).
+
+# Per-artifact rules
+rules:
+  specs:
+    - Write requirements in the domain vocabulary from CONTEXT.md; never use an _Avoid_ term.
+    - Every requirement MUST have at least one scenario (#### with WHEN/THEN).
+    - Solver requirements MUST forbid floating-point arithmetic.
+  proposal:
+    - Reference existing capabilities under openspec/specs/ before declaring new or modified ones.
+
+# Per-operation guidance
+operations:
+  apply:
+    guidance:
+      - Keep test summaries concise
+  archive:
+    guidance:
+      - Summarize the archive outcome before finishing
