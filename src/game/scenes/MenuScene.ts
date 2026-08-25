@@ -26,5 +26,8 @@ export class MenuScene extends Phaser.Scene {
     addButton(this, W / 2, H * 0.60, 440, 100, '24 点提示', () => this.scene.start('Hint'), {
       fontSize: '34px',
     });
+    addButton(this, W / 2, H * 0.72, 440, 100, '组合速查', () => this.scene.start('Combo'), {
+      fontSize: '34px',
+    });
   }
 }
