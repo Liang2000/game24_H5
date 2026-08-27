@@ -19,6 +19,8 @@ export const FACE_LABELS: Record<number, string> = {
   11: 'J',
   12: 'Q',
   13: 'K',
+  14: 'V',
+  15: 'W',
 };
 
 export function faceLabel(value: number): string {

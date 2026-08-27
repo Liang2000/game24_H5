@@ -33,6 +33,8 @@ describe('faceLabel', () => {
     expect(faceLabel(11)).toBe('J');
     expect(faceLabel(12)).toBe('Q');
     expect(faceLabel(13)).toBe('K');
+    expect(faceLabel(14)).toBe('V');
+    expect(faceLabel(15)).toBe('W');
     expect(faceLabel(7)).toBe('7');
   });
 });

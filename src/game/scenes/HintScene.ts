@@ -3,7 +3,7 @@ import { addButton, addText, COLORS } from '../ui';
 import { faceLabel } from '../../core/game';
 import { solve } from '../../core/solver';
 
-const VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+const VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 export class HintScene extends Phaser.Scene {
   private selected: number[] = [];
@@ -94,6 +94,8 @@ export class HintScene extends Phaser.Scene {
 
   private pick(v: number): void {
     if (this.selected.length >= 4) return;
+    // 大小王各限选一张
+    if (v >= 14 && this.selected.includes(v)) return;
     this.selected.push(v);
     this.updateBoxes();
   }
